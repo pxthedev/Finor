@@ -1,0 +1,4 @@
+CREATE TABLE chat_session(id UUID PRIMARY KEY,user_id UUID NOT NULL REFERENCES app_user(id) ON DELETE CASCADE,created_at TIMESTAMPTZ NOT NULL DEFAULT now(),UNIQUE(id,user_id));
+CREATE TABLE chat_message(id UUID PRIMARY KEY,user_id UUID NOT NULL REFERENCES app_user(id) ON DELETE CASCADE,session_id UUID NOT NULL,role VARCHAR(20) NOT NULL,content TEXT NOT NULL,created_at TIMESTAMPTZ NOT NULL DEFAULT now(),FOREIGN KEY(session_id,user_id) REFERENCES chat_session(id,user_id));
+CREATE INDEX chat_message_session_idx ON chat_message(user_id,session_id,created_at);
+CREATE TABLE assistant_action(id UUID PRIMARY KEY,user_id UUID NOT NULL REFERENCES app_user(id) ON DELETE CASCADE,session_id UUID NOT NULL,payload TEXT NOT NULL,status VARCHAR(12) NOT NULL DEFAULT 'PENDING' CHECK(status IN ('PENDING','CONFIRMED','REJECTED')),created_at TIMESTAMPTZ NOT NULL DEFAULT now(),FOREIGN KEY(session_id,user_id) REFERENCES chat_session(id,user_id));

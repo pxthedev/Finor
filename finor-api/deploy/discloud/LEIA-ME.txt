@@ -1,0 +1,25 @@
+FINOR API - DISCLOUD
+
+Domínio reservado: finor.discloud.dev
+URL do mobile após o deploy: https://finor.discloud.dev/api/v1
+
+Este pacote usa Java 21+ e a porta 8080. O plano deve permitir TYPE=site
+e a RAM informada no discloud.config (1024 MB).
+
+Se o pacote ainda não inclui .env e credentials/firebase-admin.json:
+1. Preencha .env.example e salve como .env.
+2. Adicione a credencial privada Admin Firebase em credentials/firebase-admin.json.
+3. Configure a chave GroqCloud apenas no .env do servidor.
+
+O start.sh carrega o .env para o processo Java, ativa firestore,prod e
+recusa emuladores e credenciais ausentes. As requisições financeiras
+continuam exigindo autenticação Firebase.
+
+No painel Discloud, envie o ZIP com discloud.config e app.jar na raiz.
+Ou faça login no CLI e execute discloud app up dentro desta pasta.
+
+Após a API responder, execute na raiz do workspace:
+.\scripts\configure-ios-preview.ps1 -ApiUrl 'https://finor.discloud.dev/api/v1' -StartBuild
+
+Credenciais incluídas em um pacote de deploy são privadas. Não publique
+esse pacote em repositórios nem o envie para o aplicativo mobile.

@@ -1,0 +1,31 @@
+spring:
+  profiles:
+    default: firestore
+  mail:
+    properties:
+      "[mail.smtp.auth]": true
+      "[mail.smtp.starttls.enable]": ${SPRING_MAIL_PROPERTIES_MAIL_SMTP_STARTTLS_ENABLE:true}
+      "[mail.smtp.starttls.required]": ${SPRING_MAIL_PROPERTIES_MAIL_SMTP_STARTTLS_ENABLE:true}
+      "[mail.smtp.ssl.enable]": ${SPRING_MAIL_PROPERTIES_MAIL_SMTP_SSL_ENABLE:false}
+      "[mail.smtp.ssl.checkserveridentity]": true
+      "[mail.smtp.connectiontimeout]": 5000
+      "[mail.smtp.timeout]": 10000
+      "[mail.smtp.writetimeout]": 10000
+  datasource:
+    url: ${DATABASE_URL:jdbc:postgresql://localhost:5432/finor}
+    hikari:
+      connection-init-sql: SET TIME ZONE 'America/Sao_Paulo'
+    username: ${DATABASE_USER:finor}
+    password: ${DATABASE_PASSWORD}
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: validate
+  flyway:
+    enabled: true
+server:
+  error:
+    include-message: never
+    include-stacktrace: never
+
+

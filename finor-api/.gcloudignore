@@ -1,0 +1,11 @@
+.git
+.gitignore
+.env
+.env.*
+!.env.example
+*.log
+target/
+.m2/
+.secrets/
+*service-account*.json
+*firebase-adminsdk*.json

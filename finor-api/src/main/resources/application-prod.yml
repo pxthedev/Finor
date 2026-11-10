@@ -1,0 +1,9 @@
+springdoc:
+  api-docs:
+    enabled: false
+  swagger-ui:
+    enabled: false
+server:
+  forward-headers-strategy: framework
+finor:
+  require-https: true

@@ -1,0 +1,40 @@
+services:
+  db:
+    image: postgres:17
+    environment:
+      POSTGRES_DB: finor
+      POSTGRES_USER: finor
+      POSTGRES_PASSWORD: ${DATABASE_PASSWORD:?Defina DATABASE_PASSWORD}
+    ports: ["127.0.0.1:5432:5432"]
+    volumes: ["finor-db:/var/lib/postgresql/data"]
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U finor"]
+      interval: 5s
+      retries: 10
+  api:
+    build: ./finor-api
+    environment:
+      GROQ_MODEL: ${GROQ_MODEL:-openai/gpt-oss-20b}
+      GROQ_API_KEY: ${GROQ_API_KEY:-}
+      MAIL_FROM: ${MAIL_FROM:-}
+      SPRING_MAIL_HOST: ${SPRING_MAIL_HOST:-}
+      SPRING_MAIL_PORT: ${SPRING_MAIL_PORT:-587}
+      SPRING_MAIL_USERNAME: ${SPRING_MAIL_USERNAME:-}
+      SPRING_MAIL_PASSWORD: ${SPRING_MAIL_PASSWORD:-}
+      SPRING_MAIL_PROPERTIES_MAIL_SMTP_STARTTLS_ENABLE: ${SPRING_MAIL_PROPERTIES_MAIL_SMTP_STARTTLS_ENABLE:-true}
+      SPRING_MAIL_PROPERTIES_MAIL_SMTP_SSL_ENABLE: ${SPRING_MAIL_PROPERTIES_MAIL_SMTP_SSL_ENABLE:-false}
+      JWT_SECRET: ${JWT_SECRET:?Defina JWT_SECRET}
+      DATABASE_URL: jdbc:postgresql://db:5432/finor
+      DATABASE_USER: finor
+      DATABASE_PASSWORD: ${DATABASE_PASSWORD}
+    ports: ["127.0.0.1:8080:8080"]
+    depends_on:
+      db:
+        condition: service_healthy
+volumes:
+  finor-db:
+
+
+
+
+

@@ -1,0 +1,31 @@
+services:
+  api:
+    build: ./finor-api
+    environment:
+      SPRING_PROFILES_ACTIVE: ${SPRING_PROFILES_ACTIVE:-supabase}
+      SUPABASE_JDBC_URL: ${SUPABASE_JDBC_URL:?Defina SUPABASE_JDBC_URL}
+      SUPABASE_DB_USER: ${SUPABASE_DB_USER:?Defina SUPABASE_DB_USER}
+      SUPABASE_DB_PASSWORD: ${SUPABASE_DB_PASSWORD:?Defina SUPABASE_DB_PASSWORD}
+      SUPABASE_SSL_ROOT_CERT: /run/finor/supabase-ca.crt
+      DATABASE_POOL_SIZE: ${DATABASE_POOL_SIZE:-5}
+      JWT_SECRET: ${JWT_SECRET:?Defina JWT_SECRET}
+      GROQ_API_KEY: ${GROQ_API_KEY:-}
+      GROQ_MODEL: ${GROQ_MODEL:-openai/gpt-oss-20b}
+      MAIL_FROM: ${MAIL_FROM:-}
+      SPRING_MAIL_HOST: ${SPRING_MAIL_HOST:-}
+      SPRING_MAIL_PORT: ${SPRING_MAIL_PORT:-587}
+      SPRING_MAIL_USERNAME: ${SPRING_MAIL_USERNAME:-}
+      SPRING_MAIL_PASSWORD: ${SPRING_MAIL_PASSWORD:-}
+      SPRING_MAIL_PROPERTIES_MAIL_SMTP_STARTTLS_ENABLE: ${SPRING_MAIL_PROPERTIES_MAIL_SMTP_STARTTLS_ENABLE:-true}
+      SPRING_MAIL_PROPERTIES_MAIL_SMTP_SSL_ENABLE: ${SPRING_MAIL_PROPERTIES_MAIL_SMTP_SSL_ENABLE:-false}
+    volumes:
+      - type: bind
+        source: ${SUPABASE_SSL_ROOT_CERT:?Defina SUPABASE_SSL_ROOT_CERT}
+        target: /run/finor/supabase-ca.crt
+        read_only: true
+        bind:
+          create_host_path: false
+    ports: ["127.0.0.1:8080:8080"]
+
+
+

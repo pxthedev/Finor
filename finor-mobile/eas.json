@@ -1,0 +1,38 @@
+{
+  "cli": { "version": ">=19.1.0", "appVersionSource": "remote" },
+  "build": {
+    "development": {
+      "distribution": "internal",
+      "environment": "development",
+      "env": { "FINOR_ALLOW_LOCAL_NETWORK": "1" },
+      "android": { "gradleCommand": ":app:assembleDebug" },
+      "ios": { "buildConfiguration": "Debug" }
+    },
+    "preview": {
+      "distribution": "internal",
+      "environment": "preview",
+      "android": { "buildType": "apk" },
+      "ios": { "simulator": false }
+    },
+    "ios-simulator": {
+      "extends": "preview",
+      "ios": { "simulator": true }
+    },
+    "ios-unsigned": {
+      "extends": "preview",
+      "ios": {
+        "simulator": false,
+        "withoutCredentials": true,
+        "config": "ios-unsigned.yml",
+        "applicationArchivePath": "build/ios/*/export/finor-unsigned.ipa"
+      }
+    },
+    "production": {
+      "autoIncrement": true,
+      "environment": "production",
+      "android": { "buildType": "app-bundle" },
+      "ios": { "simulator": false }
+    }
+  },
+  "submit": { "production": {} }
+}

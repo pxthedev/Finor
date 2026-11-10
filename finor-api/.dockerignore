@@ -1,0 +1,7 @@
+node_modules
+.m2
+.git
+.env
+*.log
+target
+.secrets

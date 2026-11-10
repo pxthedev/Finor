@@ -1,0 +1,22 @@
+spring:
+  datasource:
+    url: ${SUPABASE_JDBC_URL}
+    username: ${SUPABASE_DB_USER}
+    password: ${SUPABASE_DB_PASSWORD}
+    hikari:
+      schema: finor
+      maximum-pool-size: ${DATABASE_POOL_SIZE:5}
+      minimum-idle: 1
+      connection-timeout: 10000
+      data-source-properties:
+        sslmode: verify-full
+        sslrootcert: ${SUPABASE_SSL_ROOT_CERT}
+  flyway:
+    schemas: finor
+    default-schema: finor
+    create-schemas: true
+    locations: classpath:db/migration,classpath:db/supabase
+  jpa:
+    properties:
+      hibernate:
+        default_schema: finor

@@ -1,0 +1,7 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // The mobile client uses the Java API. Server access is controlled by IAM and API ownership.
+    match /{document=**} { allow read, write: if false; }
+  }
+}

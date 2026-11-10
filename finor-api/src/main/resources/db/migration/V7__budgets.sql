@@ -1,0 +1,2 @@
+CREATE TABLE budget(id UUID PRIMARY KEY,user_id UUID NOT NULL REFERENCES app_user(id) ON DELETE CASCADE,month DATE NOT NULL,UNIQUE(user_id,month),UNIQUE(id,user_id));
+CREATE TABLE budget_allocation(id UUID PRIMARY KEY,user_id UUID NOT NULL REFERENCES app_user(id) ON DELETE CASCADE,budget_id UUID NOT NULL,category_id UUID NOT NULL,amount NUMERIC(19,2) NOT NULL CHECK(amount>=0),UNIQUE(budget_id,category_id),FOREIGN KEY(budget_id,user_id) REFERENCES budget(id,user_id) ON DELETE CASCADE,FOREIGN KEY(category_id,user_id) REFERENCES category(id,user_id));

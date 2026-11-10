@@ -1,0 +1,68 @@
+{
+  "name": "finor-mobile",
+  "version": "0.1.0",
+  "private": true,
+  "main": "expo-router/entry",
+  "scripts": {
+    "start": "expo start",
+    "android": "expo run:android",
+    "ios": "expo run:ios",
+    "export:mobile": "expo export --platform all --output-dir dist-mobile-check",
+    "build:android:preview": "npx eas-cli build --platform android --profile preview",
+    "build:ios:preview": "npx eas-cli build --platform ios --profile preview",
+    "build:ipa": "npx eas-cli build --platform ios --profile ios-unsigned",
+    "build:ipa:signed": "npx eas-cli build --platform ios --profile preview",
+    "build:ipa:store": "npx eas-cli build --platform ios --profile production",
+    "ipa:mac": "node scripts/build-ipa.cjs",
+    "ipa:check": "node scripts/build-ipa.cjs --check",
+    "build:ios:simulator": "npx eas-cli build --platform ios --profile ios-simulator",
+    "build:preview": "npx eas-cli build --platform all --profile preview",
+    "build:production": "npx eas-cli build --platform all --profile production",
+    "test:platforms": "node --test tests/native-build.test.cjs",
+    "check:platforms": "node scripts/check-platforms.cjs",
+    "typecheck": "tsc --noEmit",
+    "test:planning": "node --test tests/planning-summary.test.cjs",
+    "test:installments": "node --test tests/installments.test.cjs"
+  },
+  "dependencies": {
+    "@capacitor/cli": "^8.6.0",
+    "@capacitor/core": "^8.6.0",
+    "@capacitor/ios": "^8.6.0",
+    "@hookform/resolvers": "^5.2.0",
+    "@react-native-google-signin/google-signin": "^17.0.0",
+    "@tanstack/react-query": "^5.90.0",
+    "expo": "^58.0.23",
+    "expo-crypto": "~58.0.7",
+    "expo-image-manipulator": "~58.0.16",
+    "expo-image-picker": "~58.0.10",
+    "expo-router": "~58.0.30",
+    "expo-secure-store": "~58.0.2",
+    "expo-status-bar": "~58.0.4",
+    "lucide-react-native": "1.70.0",
+    "react": "19.3.0",
+    "react-dom": "19.3.0",
+    "react-hook-form": "^7.65.0",
+    "react-native": "0.88.1",
+    "react-native-reanimated": "4.7.1",
+    "react-native-safe-area-context": "~5.11.1",
+    "react-native-screens": "~4.30.1",
+    "react-native-svg": "15.16.0",
+    "react-native-worklets": "0.13.0",
+    "zod": "^4.1.0",
+    "zustand": "^5.0.0"
+  },
+  "devDependencies": {
+    "@types/react": "~19.3.0",
+    "prettier": "^3.9.10",
+    "typescript": "~6.0.3"
+  },
+  "expo": {
+    "autolinking": {
+      "exclude": ["@capacitor/ios", "@capacitor/android"]
+    }
+  },
+  "overrides": {
+    "glob": "14.0.2",
+    "minimatch": "11.0.1"
+  }
+}

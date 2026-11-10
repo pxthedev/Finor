@@ -1,0 +1,1 @@
+{"indexes":[],"fieldOverrides":[{"collectionGroup":"requests","fieldPath":"response","indexes":[]},{"collectionGroup":"actions","fieldPath":"payload","indexes":[]},{"collectionGroup":"messages","fieldPath":"content","indexes":[]},{"collectionGroup":"finor_users","fieldPath":"password_hash","indexes":[]}]}

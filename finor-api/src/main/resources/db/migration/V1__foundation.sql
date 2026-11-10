@@ -1,0 +1,16 @@
+CREATE TABLE app_user (
+ id UUID PRIMARY KEY,
+ name VARCHAR(120) NOT NULL,
+ email VARCHAR(254) NOT NULL UNIQUE,
+ password_hash VARCHAR(255) NOT NULL,
+ created_at TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+CREATE TABLE account (
+ id UUID PRIMARY KEY,
+ user_id UUID NOT NULL REFERENCES app_user(id) ON DELETE CASCADE,
+ name VARCHAR(120) NOT NULL,
+ type VARCHAR(30) NOT NULL,
+ opening_balance NUMERIC(19,2) NOT NULL,
+ UNIQUE(id,user_id)
+);
+CREATE INDEX account_user_idx ON account(user_id);

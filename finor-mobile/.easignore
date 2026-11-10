@@ -1,0 +1,19 @@
+node_modules/
+.expo/
+.tools/
+.modules-sdk54/
+dist*/
+/build/
+*.log
+.env
+.env.*
+!.env.example
+*.jks
+*.keystore
+*.p12
+*.mobileprovision
+*service-account*.json
+*firebase-adminsdk*.json
+# Generate native projects on the correct platform in EAS (CNG).
+/android/
+/ios/

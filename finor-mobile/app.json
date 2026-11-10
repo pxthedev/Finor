@@ -1,0 +1,42 @@
+{
+  "expo": {
+    "name": "finor",
+    "slug": "finor",
+    "scheme": "finor",
+    "version": "0.1.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "dark",
+    "ios": {
+      "bundleIdentifier": "com.finor.app",
+      "supportsTablet": true
+    },
+    "android": {
+      "package": "com.finor.app",
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#000000"
+      }
+    },
+    "plugins": [
+      "expo-router",
+      "expo-secure-store"
+    ],
+    "icon": "./assets/icon.png",
+    "splash": {
+      "resizeMode": "contain",
+      "backgroundColor": "#000000",
+      "image": "./assets/icon.png"
+    },
+    "extra": {
+      "router": {
+        "asyncRoutes": {
+          "web": true
+        }
+      },
+      "eas": {
+        "projectId": "e40941cd-113c-46e9-ac62-869cf2fcd3f1"
+      }
+    },
+    "owner": "voltarellidev"
+  }
+}

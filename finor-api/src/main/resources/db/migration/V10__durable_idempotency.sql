@@ -1,0 +1,1 @@
+CREATE TABLE transaction_request(user_id UUID NOT NULL REFERENCES app_user(id) ON DELETE CASCADE,idempotency_key UUID NOT NULL,fingerprint TEXT NOT NULL,response_json TEXT,created_at TIMESTAMPTZ NOT NULL DEFAULT now(),PRIMARY KEY(user_id,idempotency_key));
