@@ -29,6 +29,11 @@ function validateBuildEnvironment(env) {
       "Os builds instaláveis Android/iOS exigem Firebase real. Remova a configuração do emulador do ambiente EAS.",
     );
   }
+  if (!env.EXPO_PUBLIC_FIREBASE_API_KEY?.trim()) {
+    throw new Error(
+      "Configure EXPO_PUBLIC_FIREBASE_API_KEY no ambiente EAS antes de gerar o app Android/iOS.",
+    );
+  }
   if (env.FINOR_ALLOW_LOCAL_NETWORK === "1") {
     throw new Error(
       "FINOR_ALLOW_LOCAL_NETWORK é exclusivo dos builds de desenvolvimento.",

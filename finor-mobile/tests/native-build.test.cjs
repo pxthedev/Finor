@@ -22,6 +22,7 @@ test("standalone builds cannot point at a disconnected local server", () => {
         validateBuildEnvironment({
           EAS_BUILD_PROFILE: profile,
           EXPO_PUBLIC_API_URL: api,
+          EXPO_PUBLIC_FIREBASE_API_KEY: "test-firebase-key",
         }),
       );
     }
@@ -29,6 +30,7 @@ test("standalone builds cannot point at a disconnected local server", () => {
       validateBuildEnvironment({
         EAS_BUILD_PROFILE: profile,
         EXPO_PUBLIC_API_URL: "https://api.example.com/api/v1",
+        EXPO_PUBLIC_FIREBASE_API_KEY: "test-firebase-key",
       }),
     );
   }
@@ -38,8 +40,10 @@ test("test credentials and HTTP exceptions do not go into installable builds", (
   const base = {
     EAS_BUILD_PROFILE: "production",
     EXPO_PUBLIC_API_URL: "https://api.example.com/api/v1",
+    EXPO_PUBLIC_FIREBASE_API_KEY: "test-firebase-key",
   };
   for (const testConfig of [
+    { EXPO_PUBLIC_FIREBASE_API_KEY: undefined },
     { EXPO_PUBLIC_FIREBASE_API_KEY: "demo-key" },
     { EXPO_PUBLIC_FIREBASE_AUTH_EMULATOR_URL: "http://127.0.0.1:9099" },
     { FINOR_ALLOW_LOCAL_NETWORK: "1" },

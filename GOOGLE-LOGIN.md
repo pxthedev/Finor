@@ -7,7 +7,7 @@ O aplicativo Expo usa Firebase Authentication (REST oficial) para e-mail/senha e
 1. No projeto Firebase, abra Authentication > Sign-in method e ative **E-mail/senha** e **Google**. Defina o e-mail de suporte do provedor Google.
 2. Registre Android com package `com.finor.app` e iOS com bundle `com.finor.app`. Cadastre os fingerprints SHA-1/SHA-256 dos certificados de desenvolvimento e de produção Android (incluindo Play App Signing).
 3. No Google Cloud do mesmo projeto, confira o cliente OAuth Web e o cliente OAuth iOS. Configure a tela de consentimento e usuários de teste, quando o aplicativo estiver em teste.
-4. Em `finor-mobile/.env`, configure `EXPO_PUBLIC_GOOGLE_WEB_CLIENT_ID` e `EXPO_PUBLIC_GOOGLE_IOS_CLIENT_ID`. O ID Web termina em `.apps.googleusercontent.com`; não é uma chave de API. A chave Web Firebase vem de `src/lib/firebase.ts`, com opção de sobrescrever via `EXPO_PUBLIC_FIREBASE_API_KEY`.
+4. Em `finor-mobile/.env`, configure `EXPO_PUBLIC_GOOGLE_WEB_CLIENT_ID`, `EXPO_PUBLIC_GOOGLE_IOS_CLIENT_ID` e `EXPO_PUBLIC_FIREBASE_API_KEY`. Os IDs OAuth terminam em `.apps.googleusercontent.com`. Obtenha a chave Web nas configurações do projeto Firebase e configure as mesmas variáveis no ambiente EAS usado pelo build.
 5. No backend configure `FIREBASE_PROJECT_ID` para o mesmo projeto e `GOOGLE_APPLICATION_CREDENTIALS` para credenciais Admin com acesso a Authentication e Firestore. Use perfil `firestore` (padrão). Remova variáveis de emuladores em produção.
 6. Gere um novo build Android/iOS com EAS ou Expo nativo. Alterar os IDs exige atualizar o build. O plugin iOS deriva o URL scheme do ID OAuth iOS. Não usa Firebase SDK nativo: a troca com Firebase usa HTTPS REST.
 

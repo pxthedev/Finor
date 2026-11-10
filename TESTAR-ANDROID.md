@@ -61,7 +61,7 @@ $env:GOOGLE_APPLICATION_CREDENTIALS='C:\caminho\service-account.json'
 # Opcional para testar chat real: $env:GROQ_API_KEY='sua-chave'
 mvn '-Dmaven.repo.local=C:\dev\finance-app\.m2' -f finor-api/pom.xml spring-boot:run
 ```
-No terminal mobile remova `EXPO_PUBLIC_FIREBASE_AUTH_EMULATOR_URL` e `EXPO_PUBLIC_FIREBASE_API_KEY` de teste (usa a configuração Web do projeto), configure os IDs Google em `.env` e execute `npx expo run:android --device`. Registre o SHA-1/SHA-256 do certificado de assinatura no Firebase para Google funcionar.
+No terminal mobile, remova `EXPO_PUBLIC_FIREBASE_AUTH_EMULATOR_URL` e o valor `demo-key` do ambiente. Em `finor-mobile/.env`, configure a chave Web real em `EXPO_PUBLIC_FIREBASE_API_KEY` e os IDs Google. Execute `npx expo run:android --device`. Registre o SHA-1/SHA-256 do certificado de assinatura no Firebase para Google funcionar.
 
 ## Gerar APK para transferência
 

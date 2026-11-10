@@ -18,9 +18,6 @@ if ($config.expo.extra.eas.projectId -ne 'e40941cd-113c-46e9-ac62-869cf2fcd3f1' 
 # An unauthenticated financial endpoint must answer 401, not a public data response.
 $response = Invoke-WebRequest -Uri "$baseUrl/users/me" -SkipHttpErrorCheck -TimeoutSec 20
 if ($response.StatusCode -ne 401) { throw "A API não apresentou o comportamento esperado (HTTP $($response.StatusCode)). Nenhuma variável foi alterada." }
-$firebaseSource = Get-Content (Join-Path $mobile 'src/lib/firebase.ts') -Raw
-$keyMatch = [regex]::Match($firebaseSource, 'apiKey:\s*"([^"]+)"')
-if (-not $keyMatch.Success) { throw 'Chave Web pública Firebase não encontrada.' }
 Push-Location $mobile
 try {
     $env:EAS_PROJECT_ROOT = $mobile
@@ -29,8 +26,10 @@ try {
     # Only these public app variables are sent. Backend keys and .env are never uploaded.
     $variables = [ordered]@{
         EXPO_PUBLIC_API_URL = $baseUrl
-        EXPO_PUBLIC_FIREBASE_API_KEY = $keyMatch.Groups[1].Value
         FINOR_ALLOW_LOCAL_NETWORK = '0'
+    }
+    if ($env:EXPO_PUBLIC_FIREBASE_API_KEY -match '^AIza[0-9A-Za-z_-]{35}$') {
+        $variables['EXPO_PUBLIC_FIREBASE_API_KEY'] = $env:EXPO_PUBLIC_FIREBASE_API_KEY
     }
     foreach ($variable in $variables.GetEnumerator()) {
         & npx --yes eas-cli@latest env:set preview --name $variable.Key --value $variable.Value --visibility plaintext --scope project --non-interactive

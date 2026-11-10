@@ -38,7 +38,7 @@ Quando a API HTTPS estiver disponível, este comando na raiz do workspace confer
 .\scripts\configure-ios-preview.ps1 -ApiUrl 'https://finor.discloud.dev/api/v1' -StartBuild
 ```
 
-Substitua a URL pelo endereço real. O script não envia chaves GroqCloud ou credenciais Admin ao aplicativo e mantém a configuração local de desenvolvimento separada do build na nuvem.
+Substitua a URL pelo endereço real. Configure `EXPO_PUBLIC_FIREBASE_API_KEY` no ambiente `preview` do EAS. Para atualizar essa variável pelo script, defina a chave Web no ambiente do PowerShell antes de executá-lo.
 
 Se tiver um Mac, também pode usar sua conta gratuita como **Personal Team** no Xcode, escolher o iPhone e executar `npm run ios -- --device`. Nesse caso, o Xcode instala diretamente o app de desenvolvimento e não é necessário exportar um IPA de distribuição.
 
@@ -135,7 +135,7 @@ No Android por USB, mantenha o fluxo atual de `TESTAR-ANDROID.md`. Não troque a
 2. Dentro de `finor-mobile`, execute `npx eas-cli login` e `npx eas-cli init` para vincular o projeto. Não cole senhas ou credenciais no código.
 3. Disponibilize a API por HTTPS. No painel Expo, configure as variáveis públicas nos ambientes `preview` e `production`:
    - `EXPO_PUBLIC_API_URL`: URL real da API, incluindo `/api/v1`.
-   - `EXPO_PUBLIC_FIREBASE_API_KEY`: chave Web do projeto Firebase real, quando diferente da configuração existente.
+   - `EXPO_PUBLIC_FIREBASE_API_KEY`: chave Web do projeto Firebase real.
    - `EXPO_PUBLIC_GOOGLE_WEB_CLIENT_ID` e `EXPO_PUBLIC_GOOGLE_IOS_CLIENT_ID`: se usar Google.
 4. Remova `EXPO_PUBLIC_FIREBASE_AUTH_EMULATOR_URL` e mantenha `FINOR_ALLOW_LOCAL_NETWORK` ausente ou `0` nesses ambientes. Chaves GroqCloud e credenciais Admin Firebase ficam no servidor.
 

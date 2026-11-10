@@ -1,4 +1,3 @@
-import { firebaseConfig } from "./lib/firebase";
 import { Platform } from "react-native";
 export type FirebaseSession = {
   accessToken: string;
@@ -7,7 +6,7 @@ export type FirebaseSession = {
   email: string;
   provider: "password" | "google.com";
 };
-const key = process.env.EXPO_PUBLIC_FIREBASE_API_KEY || firebaseConfig.apiKey;
+const key = process.env.EXPO_PUBLIC_FIREBASE_API_KEY;
 async function call(path: string, body: object, refresh = false): Promise<any> {
   if (!key) throw new Error("Configure a chave Web do Firebase.");
   const emulator = process.env.EXPO_PUBLIC_FIREBASE_AUTH_EMULATOR_URL;
